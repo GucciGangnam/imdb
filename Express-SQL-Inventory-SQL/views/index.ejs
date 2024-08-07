@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+
+
+  <%- include('navbar') %>
+
+
+
+  <p>Welcome to <%= title %>
+  </p>
+
+
+  <div class="movies-container">
+
+    <% movies.forEach(function(movie) { %>
+      <div class="movie-container">
+        <div class="movie-title">
+          <%= movie.title %>
+        </div>
+        <div class="movie-synopsis">
+          <%= movie.synopsis %>
+        </div>
+        <div class="movie-meta">
+          <div class="movie-director">
+            Directed by: Director
+          </div>
+          <div class="movie-year">
+            Year: <%= movie.release_year %>
+          </div>
+        </div>
+      </div>
+      <%}); %>
+
+  </div>
+
+</body>
+</html>
