@@ -8,17 +8,42 @@ a {
 }
 
 
+/* NAV BAR */
+
+.navbar{ 
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+
+}
+
+.nav-btn{ 
+
+}
 
 
 /* INDEX  */
 
-.movies-container{ 
+.movies-page{ 
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.movie-container {
+.genres-page{ 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.actors-page{ 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.index-container {
   border: 1px solid #ddd;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
   padding: 10px;
@@ -28,25 +53,74 @@ a {
   flex-direction: column;
 }
 
-.movie-title {
+.index-title {
 font-size: 24px;
 font-weight: bold;
 }
 
-.movie-synopsis {
+.index-synopsis {
   font-size: 14px;
 }
-.movie-meta{ 
+.index-meta{ 
   display: flex;
   gap: 20px;
   color: rgb(186, 186, 186);
 
 }
 
-.movie-director{ 
+.index-director{ 
 
 }
 
-.movie-year {
+.index-year {
 
+}
+
+
+
+
+/*  FORMS  */
+form{ 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: start;
+  width: 100%;
+}
+
+.form-section{ 
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+padding: 10px;
+display: flex;
+border: 1px solid #ddd;
+box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+border-radius: 10px;
+width: calc(100% - 20px);
+}
+
+form label{ 
+  min-width: 100px;
+  font-weight: bold;
+}
+
+form input{ 
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  width: calc(100% - 20px);
+  background-color: #e1e9ec;
+}
+
+form textarea{ 
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  width: calc(100% - 20px);
+  background-color: #e1e9ec;
+}
+
+.error-message{ 
+  color: red;
 }

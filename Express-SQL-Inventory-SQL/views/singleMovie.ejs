@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        <%= title %> (Movie)
+    </h1>
+    <%- include('navbar') %>
+
+
+        <div class="single-movies-page">
+        </div>
+
+        <ul>
+            <li>Synposis: <%= movie.synopsis %></li>
+            <li>Release Year: <%= movie.release_year %></li>
+            <li>Genre: <%= movie.genre %></li>
+            <li>Director: <%= movie.director_first_name %> <%= movie.director_last_name %></li>
+        </ul>
+
+        Cast:
+        <ul>
+            <% movie.cast.forEach(function(member) { %>
+                <li><%= member.First_Name %> <%= member.Last_Name %> as <%= member.Role %></li>
+            <% }) %>
+        </ul>
+
+        <script>
+        </script>
+
+</body>
+
+</html>

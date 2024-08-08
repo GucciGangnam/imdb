@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Add Genre
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        Add a genre
+    </h1>
+    <p>
+    </p>
+    <%- include('navbar') %>
+
+
+        <div class="add-genre-page">
+            <form action="/genres/add" method="POST">
+                <div class="form-section">
+                    <label for="name">Genre name:
+
+                        <% if (typeof error !=='undefined' && error) { %>
+                            <div class="error-message">
+                                <p>
+                                    <%= error %>
+                                </p>
+                            </div>
+                            <% } %>
+
+
+                    </label>
+                    <input type="text" id="name" name="name" placeholder="Enter genre name" required>
+                </div>
+                <button type="submit">Add Genre</button>
+            </form>
+        </div>
+
+        <script>
+        </script>
+
+</body>
+
+</html>

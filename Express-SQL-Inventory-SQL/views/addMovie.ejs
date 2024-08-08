@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Add Movie
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        Add a movie
+    </h1>
+    <p>
+    </p>
+    <%- include('navbar') %>
+
+
+    <div class="add-movie-page">
+        <form action="/movies/add" method="POST">
+            <div class="form-section">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" placeholder="Enter movie title" required>
+            </div>
+            
+            <div class="form-section">
+                <label for="release_year">Release Year:</label>
+                <input type="number" id="release_year" name="release_year" placeholder="Enter release year" required>
+            </div>
+        
+            <div class="form-section">
+                <label for="genre">Genre:</label>
+                <select id="genre" name="genre" required>
+                    <option value="" disabled selected>Select genre</option>
+                    <% options.genres.forEach(function(genre) { %>
+                        <option value="<%= genre.id %>"><%= genre.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+        
+            <div class="form-section">
+                <label for="director">Director:</label>
+                <select id="director" name="director" required>
+                    <option value="" disabled selected>Select director</option>
+                    <% options.directors.forEach(function(director) { %>
+                        <option value="<%= director.id %>"><%= director.first_name %> <%= director.last_name %></option>
+                    <% }); %>
+                </select>
+            </div>
+        
+            <div class="form-section">
+                <label for="synopsis">Synopsis:</label>
+                <textarea id="synopsis" name="synopsis" placeholder="Enter movie synopsis" rows="4"></textarea>
+            </div>
+        
+            <button type="submit">Create Movie</button>
+        </form>
+
+    </div>
+
+    <script>
+    </script>
+
+</body>
+</html>

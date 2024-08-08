@@ -12,38 +12,43 @@
   <h1>
     <%= title %>
   </h1>
-
-
+  <p>Movies
+  </p>
   <%- include('navbar') %>
 
 
-
-  <p>Welcome to <%= title %>
-  </p>
-
-
-  <div class="movies-container">
+  <div class="movies-page">
 
     <% movies.forEach(function(movie) { %>
-      <div class="movie-container">
-        <div class="movie-title">
+      <div class="index-container"
+      onclick="handleClick('<%= movie.id %>')">
+        <div class="index-title">
           <%= movie.title %>
         </div>
-        <div class="movie-synopsis">
+        <div class="index-synopsis">
           <%= movie.synopsis %>
         </div>
-        <div class="movie-meta">
-          <div class="movie-director">
+        <div class="index-meta">
+          <div class="index-director">
             Directed by: Director
           </div>
-          <div class="movie-year">
+          <div class="index-year">
             Year: <%= movie.release_year %>
           </div>
         </div>
       </div>
       <%}); %>
 
+      <a href="/movies/add">Add movie</a>
+
   </div>
+
+
+  <script>
+    function handleClick(movieId) {
+      window.location.href = '/movies/' + movieId;
+    }
+  </script>
 
 </body>
 </html>

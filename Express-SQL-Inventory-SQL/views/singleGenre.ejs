@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        <%= title %> (Genre)
+    </h1>
+    <%- include('navbar') %>
+
+
+        <div class="single-genre-page">
+        </div>
+
+        List of <%= title %> movies:
+            <ul>
+                <% genre.movies.forEach(function(movie) { %>
+
+                    <li>
+                        <%= movie.Title %>
+                    </li>
+
+                    <%})%>
+
+
+            </ul>
+
+            <script>
+            </script>
+
+</body>
+
+</html>

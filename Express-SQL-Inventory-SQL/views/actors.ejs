@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        <%= title %>
+    </h1>
+    <p>Movies
+    </p>
+    <%- include('navbar') %>
+
+
+    <div class="actors-page">
+
+        <% actors.forEach(function(actor) { %>
+            <div class="index-container"
+            onclick="handleClick('<%= actor.id %>')">
+                <div class="index-title">
+                    <%= actor.last_name %>, <%= actor.first_name %>
+                </div>
+            </div>
+            <%}); %>
+
+    </div>
+
+    <script>
+        function handleClick(actorId) {
+            window.location.href = '/actor/' + actorId;
+        }
+    </script>
+
+</body>
+</html>

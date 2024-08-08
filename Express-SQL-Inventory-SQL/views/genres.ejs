@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        <%= title %>
+    </h1>
+    <p>Genres
+    </p>
+    <%- include('navbar') %>
+
+
+        <div class="genres-page">
+
+            <% genres.forEach(function(genre) { %>
+                <div class="index-container" onclick="handleClick('<%= genre.id %>')">
+                    <div class="index-title">
+                        <%= genre.name %>
+                    </div>
+                </div>
+                <%}); %>
+
+        </div>
+
+        <a href="/genres/add">Add genre</a>
+
+        <script>
+            function handleClick(genreId) {
+                window.location.href = '/genres/' + genreId;
+            }
+        </script>
+
+</body>
+
+</html>

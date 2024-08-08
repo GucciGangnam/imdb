@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        <%= title %>
+    </h1>
+    <p>Directors
+    </p>
+    <%- include('navbar') %>
+
+
+    <div class="actors-page">
+
+        <% directors.forEach(function(director) { %>
+            <div class="index-container"
+            onclick="handleClick('<%= director.id %>')">
+                <div class="index-title">
+                    <%= director.last_name %>, <%= director.first_name %> 
+                </div>
+            </div>
+            <%}); %>
+
+    </div>
+
+    <script>
+        function handleClick(directorId) {
+            window.location.href = '/director/' + directorId;
+        }
+    </script>
+
+</body>
+</html>
