@@ -21,6 +21,7 @@ router.get('/directors', index_controller.get_all_directors)
 // MOVIES 
 // Create new movie
 router.get('/movies/add', index_controller.get_add_movie);
+router.post('/movies/add', index_controller.post_add_movie);
 // Get individual movie 
 router.get('/movies/:id', index_controller.get_one_movie);
 
@@ -45,7 +46,11 @@ router.get('/actor/:id', index_controller.get_one_actor);
 
 
 // DIRECTORS
+// Add individual director 
+router.get('/director/add', index_controller.get_add_one_director);
+router.post('/director/add', index_controller.post_add_one_director);
 // Get individual director 
 router.get('/director/:id', index_controller.get_one_director);
+
 
 module.exports = router;

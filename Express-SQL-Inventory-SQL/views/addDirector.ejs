@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Add Director
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        Add a Director
+    </h1>
+    <p>
+    </p>
+    <%- include('navbar') %>
+
+
+        <div class="add-director-page">
+            <form action="/director/add" method="POST">
+                <div class="form-section">
+                    <label for="firstName">First name:</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                </div>
+                <div class="form-section">
+                    <label for="lastName">Last name:</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+                </div>
+                <div class="form-section">
+                    <label for="birthday">Birthday:</label>
+                    <input type="date" id="birthday" name="birthday" required>
+                </div>
+                <button type="submit">Add Director</button>
+            </form>
+        </div>
+        <% if (typeof error !=='undefined' && error) { %>
+            <div class="error-message">
+                <p>
+                    <%= error %>
+                </p>
+            </div>
+            <% } %>
+
+        <script>
+        </script>
+
+</body>
+
+</html>
+
+
+

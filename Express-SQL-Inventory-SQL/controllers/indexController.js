@@ -43,8 +43,41 @@ exports.get_add_movie = async (req, res, next) => {
     console.log("add new mopvie here");
     const options = await db.createNewMovieOptions();
     console.log(options)
-    res.render('addMovie', {options: options});
+    res.render('addMovie', { options: options });
 }
+exports.post_add_movie = async (req, res, next) => {
+    console.log("posting new movie");
+    const title = req.body.title;
+    const release_year = req.body.release_year;
+    const synopsis = req.body.synopsis;
+    const genre = req.body.genre;
+    const director = req.body.director;
+    console.log(title);
+    console.log(release_year)
+    console.log(genre);
+    console.log(director);
+    console.log(synopsis);
+    if (genre === 'new') {
+        console.log(req.body.new_genre);
+        const genreResult = await db.createNewGenre(req.body.new_genre);
+        if (!genreResult.success) {
+            const options = await db.createNewMovieOptions();
+            const genres = await db.getAllGenres();
+            return res.render('addMovie', { genres, options, error: genreResult.error });
+        }
+    }
+// Create the new movie
+const result = await db.createOneMovie(title, release_year, genre, director, synopsis);
+
+if (result.success) {
+    res.redirect(`/movies/${result.movieId}`);
+    return;
+} else {
+    const options = await db.createNewMovieOptions();
+    const genres = await db.getAllGenres();
+    return res.render('addMovie', { genres, options, error: result.error });
+}
+};
 
 
 
@@ -66,10 +99,10 @@ exports.get_one_genre = async (req, res, next) => {
     return;
 }
 // ADD GENRE 
-exports.get_add_genre = async (req, res, next) => { 
+exports.get_add_genre = async (req, res, next) => {
     const genres = await db.getAllGenres();
     console.log(genres)
-    res.render('addGenre',{genres: genres});
+    res.render('addGenre', { genres: genres });
 }
 exports.post_add_genre = async (req, res, next) => {
     const genreName = req.body.name;
@@ -80,7 +113,7 @@ exports.post_add_genre = async (req, res, next) => {
     } else {
         const genres = await db.getAllGenres();
         console.log(genres)
-        res.render('addGenre',{genres: genres, error: result.error});
+        res.render('addGenre', { genres: genres, error: result.error });
     }
 };
 
@@ -105,4 +138,29 @@ exports.get_one_director = async (req, res, next) => {
     const result = await db.getOneDirector(req.params.id);
     console.log(result);
     res.render('singleDirector', { director: result })
+}
+
+// ADD ONE DIRECTOR 
+exports.get_add_one_director = async (req, res, next) => {
+    res.render("addDirector");
+    return;
+}
+exports.post_add_one_director = async (req, res, next) => {
+    console.log('Adding director')
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const birthday = req.body.birthday;
+    console.log(firstName, lastName, birthday);
+    const result = await db.addOneDirector(firstName, lastName, birthday);
+    if (result.success) {
+        res.redirect('/directors');
+        return;
+    } else {
+        const directors = await db.getAllDirectors();
+        console.log(" Im aq big fat cock sucker")
+        console.log(result.error);
+        console.log(directors)
+        res.render('addDirector', { directors: directors, error: result.error });
+        return;
+    }
 }

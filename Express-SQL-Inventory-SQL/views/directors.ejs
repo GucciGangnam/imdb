@@ -17,24 +17,26 @@
     <%- include('navbar') %>
 
 
-    <div class="actors-page">
+        <div class="actors-page">
 
-        <% directors.forEach(function(director) { %>
-            <div class="index-container"
-            onclick="handleClick('<%= director.id %>')">
-                <div class="index-title">
-                    <%= director.last_name %>, <%= director.first_name %> 
+            <% directors.forEach(function(director) { %>
+                <div class="index-container" onclick="handleClick('<%= director.id %>')">
+                    <div class="index-title">
+                        <%= director.last_name %>, <%= director.first_name %>
+                    </div>
                 </div>
-            </div>
-            <%}); %>
+                <%}); %>
 
-    </div>
+        </div>
+        <a href="/director/add">Add director</a>
 
-    <script>
-        function handleClick(directorId) {
-            window.location.href = '/director/' + directorId;
-        }
-    </script>
+
+        <script>
+            function handleClick(directorId) {
+                window.location.href = '/director/' + directorId;
+            }
+        </script>
 
 </body>
+
 </html>
