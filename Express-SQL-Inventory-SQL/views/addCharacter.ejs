@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Add Actor
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        Add a character to <%= movie.title %>
+    </h1>
+    <p>
+    </p>
+    <%- include('navbar') %>
+
+
+        <div class="add-character-page">
+            <form action="/movies/addcharacter/<%= movie.id %>" method="POST">
+                <div class="form-section">
+                    <label for="characterName">Character Name:</label>
+                    <input type="text" id="characterName" name="characterName" placeholder="Enter character name" required>
+                </div>
+                
+                <div class="form-section">
+                    <label for="actor">Select Actor:</label>
+                    <select id="actor" name="actor" required>
+                        <option value="">-- Select an actor --</option>
+                        <% actors.forEach(actor => { %>
+                            <option value="<%= actor.id %>"><%= actor.first_name %> <%= actor.last_name %></option>
+                        <% }); %>
+                    </select>
+                    <a href="/actors/add">Or add an actor</a>
+                </div>
+                
+                <button type="submit">Add Character</button>
+            </form>
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="error-message">
+                    <p><%= error %></p>
+                </div>
+            <% } %>
+        </div>
+
+        <script>
+        </script>
+
+</body>
+
+</html>

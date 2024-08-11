@@ -39,8 +39,13 @@ router.get('/genres/:id', index_controller.get_one_genre);
 
 
 // ACTORS
+// GET add individual actor 
+router.get('/actors/add', index_controller.get_add_one_actor);
+// POST add individual actor 
+router.post('/actors/add', index_controller.post_add_one_actor);
 // Get individual actor 
 router.get('/actor/:id', index_controller.get_one_actor);
+
 
 
 
@@ -51,6 +56,12 @@ router.get('/director/add', index_controller.get_add_one_director);
 router.post('/director/add', index_controller.post_add_one_director);
 // Get individual director 
 router.get('/director/:id', index_controller.get_one_director);
+
+// CHARACTERS
+// ADD Character to movie
+router.get('/movies/addcharacter/:id', index_controller.get_add_one_character);
+router.post('/movies/addcharacter/:id', index_controller.post_add_one_character);
+
 
 
 module.exports = router;

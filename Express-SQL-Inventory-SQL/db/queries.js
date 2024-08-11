@@ -12,7 +12,16 @@ function formatDate(dateString) {
 //MOVIES 
 // Get all 
 async function getAllMovies() {
-    const { rows } = await pool.query("SELECT * FROM movies")
+    const query = `
+        SELECT 
+            movies.*, 
+            directors.first_name AS director_first_name, 
+            directors.last_name AS director_last_name 
+        FROM movies
+        JOIN directors ON movies.director_id = directors.id;
+    `;
+
+    const { rows } = await pool.query(query);
     return rows;
 }
 // Get one 
@@ -153,7 +162,8 @@ async function createNewGenre(name) {
 
 
 
-// Actors
+// ACTORS
+// Get all actors 
 async function getAllActors() {
     const { rows } = await pool.query("SELECT * FROM Actors ORDER BY last_name ASC")
     return rows;
@@ -192,6 +202,40 @@ async function getOneActor(actorId) {
         return actor;
     } catch (err) {
         console.error('Error executing query', err.stack);
+    }
+}
+// Create one actor 
+async function addOneActor(firstName, lastName, gender, birthday, biography) {
+    try {
+        // Sanitize inputs
+        firstName = firstName.trim().toLowerCase().replace(/^\w|\s\w/g, c => c.toUpperCase());
+        lastName = lastName.trim().toLowerCase().replace(/^\w|\s\w/g, c => c.toUpperCase());
+
+        // Check if actor already exists
+        const checkQuery = `
+            SELECT id FROM actors 
+            WHERE LOWER(first_name) = LOWER($1) 
+            AND LOWER(last_name) = LOWER($2) 
+            AND birthday = $3
+        `;
+        const checkResult = await pool.query(checkQuery, [firstName, lastName, birthday]);
+
+        if (checkResult.rows.length > 0) {
+            return { success: false, error: 'Actor already exists' };
+        }
+
+        // Add actor
+        const insertQuery = `
+            INSERT INTO actors (first_name, last_name, birthday, gender, biography) 
+            VALUES ($1, $2, $3, $4, $5)
+        `;
+        await pool.query(insertQuery, [firstName, lastName, birthday, gender, biography]);
+
+        return { success: true, message: 'Actor added successfully' };
+
+    } catch (err) {
+        console.error('Error adding new actor', err.stack);
+        return { success: false, error: 'Error adding new actor' };
     }
 }
 
@@ -269,6 +313,50 @@ async function addOneDirector(firstName, lastName, birthday) {
 }
 
 
+// ADD Character 
+async function addCharacter(movieID, actorID, characterName) {
+    try {
+        // Sanitize and validate inputs
+        movieID = parseInt(movieID); // Ensure movieID is an integer
+        actorID = parseInt(actorID); // Ensure actorID is an integer
+        characterName = characterName.trim(); // Remove extra whitespace
+
+        // Validate inputs (e.g., check if IDs are valid and name is not empty)
+        if (isNaN(movieID) || isNaN(actorID) || !characterName) {
+            throw new Error('Invalid input data');
+        }
+
+        // SQL query to check if the actor-character pair already exists
+        const checkQuery = `
+            SELECT id FROM characters 
+            WHERE movie_id = $1 AND actor_id = $2 AND role = $3
+        `;
+        const checkResult = await pool.query(checkQuery, [movieID, actorID, characterName]);
+
+        // If the actor-character pair already exists, return an error
+        if (checkResult.rows.length > 0) {
+            return { success: false, error: 'Actor-character pair already exists' };
+        }
+
+        // SQL query to insert a new character
+        const insertQuery = `
+            INSERT INTO characters (movie_id, actor_id, role) 
+            VALUES ($1, $2, $3)
+        `;
+
+        // Execute the query
+        await pool.query(insertQuery, [movieID, actorID, characterName]);
+
+        // Return success message
+        return { success: true, message: 'Character added successfully' };
+
+    } catch (err) {
+        // Log the error and return an error message
+        console.error("Error adding character", err.stack);
+        return { success: false, error: 'Error adding character' };
+    }
+}
+
 
 
 
@@ -299,5 +387,7 @@ module.exports = {
     createNewMovieOptions,
     createNewGenre,
     addOneDirector,
-    createOneMovie
+    createOneMovie,
+    addOneActor,
+    addCharacter
 }

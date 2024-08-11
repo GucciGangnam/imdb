@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Add Actor
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        Add a actor
+    </h1>
+    <p>
+    </p>
+    <%- include('navbar') %>
+
+
+        <div class="add-genre-page">
+            <form action="/actors/add" method="POST">
+                <div class="form-section">
+                    <label for="firstName">First name:</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                </div>
+                <div class="form-section">
+                    <label for="lastName">Last name:</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+                </div>
+                <div class="form-section">
+                    <label>Gender:</label>
+                    <div>
+                        <input type="radio" id="male" name="gender" value="M" required>
+                        <label for="male">Male</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="female" name="gender" value="F" required>
+                        <label for="female">Female</label>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <label for="birthday">Birthday:</label>
+                    <input type="date" id="birthday" name="birthday" required>
+                </div>
+                <div class="form-section">
+                    <label for="biography">Biography:</label>
+                    <textarea id="biography" name="biography" placeholder="Enter biography" rows="4" cols="50"></textarea>
+                </div>
+                <button type="submit">Add Actor</button>
+            </form>
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="error-message">
+                    <p><%= error %></p>
+                </div>
+            <% } %>
+        </div>
+
+        <script>
+        </script>
+
+</body>
+
+</html>

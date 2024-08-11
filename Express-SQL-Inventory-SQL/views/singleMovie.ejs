@@ -19,29 +19,37 @@
         </div>
 
         <ul>
-            <li>Synposis: <%= movie.synopsis %></li>
-            <li>Release Year: <%= movie.release_year %></li>
-            <li>Genre: <%= movie.genre %></li>
-            <li>Director: <%= movie.director_first_name %> <%= movie.director_last_name %></li>
+            <li>Synposis: <%= movie.synopsis %>
+            </li>
+            <li>Release Year: <%= movie.release_year %>
+            </li>
+            <li>Genre: <%= movie.genre %>
+            </li>
+            <li>Director: <%= movie.director_first_name %>
+                    <%= movie.director_last_name %>
+            </li>
         </ul>
 
         Cast:
-        <% if (movie.cast.some(member => member.First_Name && member.Last_Name)) { %>
+        <% if (movie.cast.some(member=> member.First_Name && member.Last_Name)) { %>
             <ul>
                 <% movie.cast.forEach(function(member) { %>
                     <% if (member.First_Name && member.Last_Name) { %> <!-- Only show valid cast members -->
-                        <li><%= member.First_Name %> <%= member.Last_Name %> as <%= member.Role || 'Unknown' %></li>
-                    <% } %>
-                <% }); %>
+                        <li>
+                            <%= member.First_Name %>
+                                <%= member.Last_Name %> as <%= member.Role || 'Unknown' %>
+                        </li>
+                        <% } %>
+                            <% }); %>
             </ul>
-        <% } else { %>
-            <p>No cast available</p>
-        <% } %>
+            <% } else { %>
+                <p>No cast available</p>
+                <% } %>
 
-        <button>Add to this list</button>
+                    <a href="/movies/addcharacter/<%= movie.id %>">Add to this list</a>
 
-        <script>
-        </script>
+                    <script>
+                    </script>
 
 </body>
 
